@@ -1,0 +1,111 @@
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
+
+public class CharacterGenerator : MonoBehaviour
+{
+    public GameObject[] archerPrefabs;
+    public GameObject[] knightPrefabs;
+    public GameObject[] magePrefabs;
+    public GameObject[] vikingPrefabs;
+    public GameObject[] roguePrefabs;
+    private Vector3 nextSpawnPosition = new Vector3(-7, -2, 0);
+    public float positionOffset = 2.0f;
+    public Vector3 characterScale = new Vector3(0.5f, 0.5f, 0.5f);
+    public TMP_Dropdown classDropdown;
+    public TextMeshProUGUI backstoryText; 
+    public TextMeshProUGUI attributesText; 
+
+    public void GenerateBackstory()
+    {
+        string className = classDropdown.options[classDropdown.value].text;
+        string backstory = BackstoryGenerator.GenerateBackstory(className);
+        backstoryText.text = backstory; 
+    }
+
+    public void GenerateAttributes()
+    {
+        string className = classDropdown.options[classDropdown.value].text;
+        CharacterAttributes attributes = AttributeGenerator.GenerateAttributes(className);
+        attributesText.text = attributes.ToString(); // Format and display the attributes
+    }
+    
+
+    public void OnCreateClassButtonClicked()
+    {
+        string selectedClass = classDropdown.options[classDropdown.value].text;
+        GameObject newCharacter = CreateCharacter(selectedClass);
+
+        // Store the generated character data
+        CharacterData.SelectedClassName = selectedClass;
+        CharacterData.CharacterSprite = newCharacter.GetComponent<SpriteRenderer>().sprite;
+        CharacterData.Backstory = BackstoryGenerator.GenerateBackstory(selectedClass);
+        CharacterAttributes attributes = AttributeGenerator.GenerateAttributes(selectedClass);
+        CharacterData.HP = attributes.HP;
+        CharacterData.Strength = attributes.Strength;
+        CharacterData.Agility = attributes.Agility;
+        CharacterData.Dexterity = attributes.Dexterity;
+        CharacterData.Intelligence = attributes.Intelligence;
+
+    }
+
+
+    public void OnPlayButtonClicked()
+    {
+    // Log character data for debugging
+        Debug.Log("Selected Class: " + CharacterData.SelectedClassName);
+    
+        // Check if CharacterSprite is not null before accessing its name
+        if (CharacterData.CharacterSprite != null)
+        {
+            Debug.Log("Character Sprite: " + CharacterData.CharacterSprite.name);
+        }
+        else
+        {
+            Debug.Log("Character Sprite is null");
+        }
+
+        Debug.Log("Backstory: " + CharacterData.Backstory);
+        Debug.Log("HP: " + CharacterData.HP);
+        Debug.Log("Strength: " + CharacterData.Strength);
+        Debug.Log("Agility: " + CharacterData.Agility);
+        Debug.Log("Dexterity: " + CharacterData.Dexterity);
+        Debug.Log("Intelligence: " + CharacterData.Intelligence);
+
+        // Load the gameplay scene
+        SceneManager.LoadScene("GameplayScene");
+    }
+
+
+
+    private GameObject CreateCharacter(string className)
+    {
+        Debug.Log("Creating character of class: " + className);
+        GameObject[] classPrefabs = null;
+        switch (className)
+        {
+            case "Archer": classPrefabs = archerPrefabs; break;
+            case "Knight": classPrefabs = knightPrefabs; break;
+            case "Mage": classPrefabs = magePrefabs; break;
+            case "Viking": classPrefabs = vikingPrefabs; break;
+            case "Rogue": classPrefabs = roguePrefabs; break;
+        }
+        
+
+        if (classPrefabs != null && classPrefabs.Length > 0)
+        {
+            GameObject prefabToInstantiate = classPrefabs[Random.Range(0, classPrefabs.Length)];
+            GameObject newCharacter = Instantiate(prefabToInstantiate, nextSpawnPosition, Quaternion.identity);
+            newCharacter.transform.localScale = characterScale;
+            nextSpawnPosition.x += positionOffset;
+            return newCharacter;
+        }
+        else
+        {
+            Debug.LogError("No prefabs available for class: " + className);
+            return null;
+        }
+    }
+    
+}
