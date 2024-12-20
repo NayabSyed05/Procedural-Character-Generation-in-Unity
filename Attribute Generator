@@ -1,0 +1,74 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CharacterAttributes
+{
+    public int HP;
+    public int Strength;
+    public int Agility;
+    public int Dexterity;
+    public int Intelligence;
+
+    public override string ToString()
+    {
+        return $"HP: {HP}\n\n" +
+               $"Strength: {Strength}\n\n" +
+               $"Agility: {Agility}\n\n" +
+               $"Dexterity: {Dexterity}\n\n" +
+               $"Intelligence: {Intelligence}";
+    }
+}
+
+public static class AttributeGenerator
+{
+    public static CharacterAttributes GenerateAttributes(string className)
+    {
+        CharacterAttributes attributes = new CharacterAttributes();
+
+        switch (className)
+        {
+            case "Knight":
+                attributes.HP = Random.Range(14, 18); 
+                attributes.Strength = Random.Range(16, 20); 
+                attributes.Agility = Random.Range(12, 16); 
+                attributes.Dexterity = Random.Range(8, 12); 
+                attributes.Intelligence = Random.Range(10, 14); 
+                break;
+            case "Archer":
+                attributes.HP = Random.Range(10, 14); 
+                attributes.Strength = Random.Range(8, 12); 
+                attributes.Agility = Random.Range(16, 20); 
+                attributes.Dexterity = Random.Range(14, 18); 
+                attributes.Intelligence = Random.Range(12, 16); 
+                
+                break;
+            case "Mage":
+                attributes.HP = Random.Range(10, 14); 
+                attributes.Strength = Random.Range(8, 12); 
+                attributes.Agility = Random.Range(12, 16); 
+                attributes.Dexterity = Random.Range(14, 18); 
+                attributes.Intelligence = Random.Range(16, 20); 
+                
+                break;
+            case "Viking":
+                attributes.HP = Random.Range(16, 20); 
+                attributes.Strength = Random.Range(14, 18); 
+                attributes.Agility = Random.Range(10, 14); 
+                attributes.Dexterity = Random.Range(12, 16); 
+                attributes.Intelligence = Random.Range(8, 12); 
+                
+                break;
+            case "Rogue":
+                attributes.HP = Random.Range(8, 12); 
+                attributes.Strength = Random.Range(10, 14); 
+                attributes.Agility = Random.Range(14, 18); 
+                attributes.Dexterity = Random.Range(16, 20); 
+                attributes.Intelligence = Random.Range(12, 16); 
+                
+                break;
+        }
+
+        return attributes;
+    }
+}
