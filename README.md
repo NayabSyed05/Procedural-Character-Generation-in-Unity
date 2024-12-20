@@ -62,19 +62,6 @@ The character generation system comprises the following components:
 - Introduce advanced narrative coherence mechanisms.
 - Extend the system to support 3D character generation as an optional module.
 
-## How to Run
-
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/your-username/procedural-character-generation-unity.git
-   ```
-
-2. Open the project in Unity.
-
-3. Explore the procedural character generation system by interacting with the UI elements in the scene.
-
-4. Customize the algorithms and assets to tailor the system to specific game requirements.
-
 ## Acknowledgements
 
 This project draws inspiration from advancements in procedural content generation techniques and classic game titles that have utilized PCG effectively. It is a testament to the versatility of Unity and the creative possibilities of procedural generation in game design.
