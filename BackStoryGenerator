@@ -1,0 +1,104 @@
+using UnityEngine;
+
+public static class BackstoryGenerator
+{
+    private static readonly string[] knightBackstories = new string[]
+    {
+        "Born into a noble family, sworn to protect the kingdom from the encroaching darkness.",
+        "Once a peasant, rose to knighthood after saving the princess from a dragon.",
+        "A mysterious knight with no past, clad in armor that never tarnishes.",
+        "From a young age, trained in the art of war to uphold an ancient family oath.",
+        "A wandering knight seeking redemption for a dishonorable deed.",
+        "Survivor of a fallen order, seeks to revive the chivalric codes of old.",
+        "Knight turned mercenary, sells skills to the highest bidder yet follows a strict moral code.",
+        "Last of a legendary lineage of knights, bearing an ancestral sword with unknown powers.",
+        "Once served a corrupt king, now fights to rectify the wrongs of the throne.",
+        "A fabled hero, rumored to have descended from the gods, wields unmatched prowess in battle."
+
+    };
+
+    private static readonly string[] archerBackstories = new string[]
+    {
+        "Grew up in the wilds, honed archery skills hunting alongside the wolves.",
+        "A former thief, renowned for unmatched precision with a bow.",
+        "An elf who left the forest kingdom to explore the human realms.",
+        "A skilled hunter, seeks revenge against the monsters that ravaged their village.",
+        "An entertainer who discovered a talent for archery during a fateful encounter.",
+        "Banished from their tribe, wanders the lands seeking a new purpose.",
+        "A scout for the king’s army, known for never missing a mark.",
+        "An adventurer who travels the world in search of ancient artifacts.",
+        "A mysterious figure, silent as the night, deadly as the arrow.",
+        "A protector of the realm, uses archery to thwart enemies from afar."
+
+    };
+
+    private static readonly string[] mageBackstories = new string[]
+    {
+        "A scholarly mage, seeks ancient wisdom in forbidden texts.",
+        "Born under a mystical constellation, showing magical prowess since infancy.",
+        "A humble apprentice who discovered a hidden talent for arcane arts.",
+        "Expelled from the wizard's council for experimenting with dark magic.",
+        "A traveler from another realm, wields otherworldly spells.",
+        "Saved by magic as a child, dedicates life to mastering the arcane.",
+        "An alchemist turned sorcerer, mixes potions with spellcraft.",
+        "A hermit mage, rumored to have lived for centuries.",
+        "Once a royal advisor, now seeks the true essence of magic.",
+        "Discovered a powerful grimoire that changed their destiny forever." 
+
+    };
+
+    private static readonly string[] vikingBackstories = new string[]
+    {
+        "A fierce warrior from the northern tribes, seeks to prove valor in battle.",
+        "Survivor of a sea monster attack, vows to conquer the seas.",
+        "A chieftain’s heir, destined to lead the clan to glory.",
+        "Banished for challenging the gods, now roams the lands as a mercenary.",
+        "A legendary raider, tales of their exploits are sung across the land.",
+        "Seeks to reclaim ancestral lands taken by rival clans.",
+        "A warrior poet, finds solace in battle and song.",
+        "Embarks on a quest to retrieve a mystical artifact stolen from their village.",
+        "A lone survivor of a brutal attack, seeks to avenge fallen kin.",
+        "Born during a great storm, believed to be blessed by Thor himself."
+
+
+    };
+
+    private static readonly string[] rogueBackstories = new string[]
+    {
+        "Grew up on the streets, mastered the art of stealth and trickery.",
+        "A former noble, turned to thievery after losing everything.",
+        "A master of disguise, infiltrates high society to swindle the corrupt.",
+        "Escaped from the kingdom's deadliest dungeon, now a fugitive.",
+        "An assassin who only targets those deemed unworthy of life.",
+        "A spy for a rebel faction, seeks to overthrow the tyrannical ruler.",
+        "A treasure hunter, uses cunning to navigate ancient ruins.",
+        "A charlatan who once sold fake potions, now seeks a life of adventure.",
+        "An expert lockpicker, never encountered a chest or door that couldn't be opened.",
+        "A gambler who lost it all, now uses skills for greater causes."
+
+
+        
+    };
+
+
+
+    public static string GenerateBackstory(string className)
+    {
+        switch (className)
+        {
+            case "Knight":
+                return knightBackstories[Random.Range(0, knightBackstories.Length)];
+            case "Archer":
+                return archerBackstories[Random.Range(0, archerBackstories.Length)];
+            case "Mage":
+                return mageBackstories[Random.Range(0, mageBackstories.Length)];
+            case "Viking":
+                return vikingBackstories[Random.Range(0, vikingBackstories.Length)];
+            case "Rogue":
+                return rogueBackstories[Random.Range(0, rogueBackstories.Length)];
+            // Add cases for Mage, Viking, and Rogue
+            default:
+                return "Unknown class";
+        }
+    }
+}
