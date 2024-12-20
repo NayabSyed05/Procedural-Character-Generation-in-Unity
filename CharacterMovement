@@ -1,0 +1,67 @@
+using UnityEngine;
+using TMPro;
+
+public class CharacterMovement : MonoBehaviour
+{
+    public float moveSpeed = 0.5f;  // Speed of horizontal movement
+    public float jumpForce = 2.0f;  // Force of the jump
+    public TextMeshProUGUI deathMessage; // Assign this in the inspector
+
+    private Rigidbody2D rb;
+    private bool isGrounded;  // Flag to check if the character is on the ground
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();  // Get the Rigidbody2D component
+        if (deathMessage != null)
+        {
+            deathMessage.enabled = false; // Initially hide the death message
+        }
+    }
+
+    void Update()
+    {
+        // Horizontal movement
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        Vector2 movement = new Vector2(moveHorizontal, 0f);
+        transform.Translate(movement * moveSpeed * Time.deltaTime);
+
+        // Jumping logic
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+        {
+            rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+        }
+
+        // Check if character falls off the screen
+        if (transform.position.y < -10) 
+        {
+            Debug.Log("Character has fallen - enabling death message.");
+            if (deathMessage != null)
+            {
+                deathMessage.enabled = true; // Show the "You're Dead" message
+            }
+        }
+
+        // Handle game exit
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit(); // Exit the game
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
+    }
+}
